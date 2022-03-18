@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('sys_produk', function (Blueprint $table) {
             $table->id();
-            $table->string('kd_barang')->unique();
-            $table->string('nama_barang');
+            $table->string('kd_produk')->unique();
+            $table->string('nama_produk');
             $table->integer('kd_kategori');
             $table->text('deskripsi');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->integer('stok_tersedia');
-            $table->integer('total_nilai');
+            $table->datetime('terakhir_diupdate');
             $table->integer('kd_user');
         });
     }
