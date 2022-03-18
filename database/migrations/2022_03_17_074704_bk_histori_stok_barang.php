@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('kd_transaksi');
             $table->enum('tipe_transaksi', ['masuk', 'keluar']);
+            $table->string('kd_barang');
             $table->integer('qty_barang');
+            $table->integer('harga_pokok_beli');
             $table->dateTime('tgl_transaksi');
             $table->integer('kd_user');
         });

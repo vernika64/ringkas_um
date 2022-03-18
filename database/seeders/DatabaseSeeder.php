@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SysKategori;
 use App\Models\SysUser;
 use App\Models\SysProduk;
 use Illuminate\Support\Carbon;
@@ -34,6 +35,11 @@ class DatabaseSeeder extends Seeder
 
         // Untuk Tabel Kategori
 
+        SysKategori::create([
+            'nama_kategori'         => 'Air Minum',
+            'deskripsi_kategori'    => 'Air Minum Kemasan',
+            'tgl_dibuat'            => Carbon::now()
+        ]);
 
         // Untuk Tabel Produk
 
@@ -41,12 +47,24 @@ class DatabaseSeeder extends Seeder
             'kd_produk'             => 'AQ_GLN',
             'nama_produk'           => 'AQUA GALON',
             'kd_kategori'           => 0,
-            'deskripsi'             => 'AQUA GALON isi 19L',
+            'deskripsi'             => 'AQUA Galon isi 19L',
             'harga_beli'            => 0,
             'harga_jual'            => 0,
             'stok_tersedia'         => 0,
             'terakhir_diupdate'     => Carbon::now(),
-            'kd_user'               => 0
+            'kd_user'               => 1
+        ]);
+
+        SysProduk::create([
+            'kd_produk'             => 'AQ_600',
+            'nama_produk'           => 'AQUA BOTOL SEDANG',
+            'kd_kategori'           => 1,
+            'deskripsi'             => 'AQUA Botol ukuran Sedang isi 600ml',
+            'harga_beli'            => 0,
+            'harga_jual'            => 0,
+            'stok_tersedia'         => 0,
+            'terakhir_diupdate'     => Carbon::now(),
+            'kd_user'               => 1
         ]);
     }
 }
