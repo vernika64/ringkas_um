@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserAccount;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('teslogin', [UserAccount::class, 'viewLogin']);
+
+Route::post('login', [UserAccount::class, 'prosesLogin']);
+
+Route::post('daftarakun', [UserAccount::class, 'daftarUser']);
