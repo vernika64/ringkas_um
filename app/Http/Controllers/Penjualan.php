@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\BkPenjualan;
+use App\Models\BkPenjualanDetail;
+use App\Models\SysProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class Penjualan extends Controller
 {
-    public function prosesPenjualanPOS(Request $req)
+    public function prosesPenjualan(Request $req)
     {
         $totaldata      = $req->input('data');
 
@@ -18,30 +20,57 @@ class Penjualan extends Controller
 
         try {
 
+            $kdinvoice = rand(1, 100000) . "/INV-PJ/";
+
             BkPenjualan::create([
+                'kd_penjualan'          => $kdinvoice,
                 'tgl_transaksi'         => Carbon::now(),
                 'total_transaksi'       => $totalharga,
                 'nominal_bayar'         => $totalbayar,
                 'kembalian'             => $kembalian
             ]);
 
-            for ($count = 1; $count <= $totalbayar; $count++) {
+            for ($count = 1; $count <= $totaldata; $count++) {
                 $barang                 = $req->input('kdbarang-' . $count);
-                $qty                    = $req->input('qty' . $count);
-                $hargasatuan            = $req->input('harga' . $count);
+                $qty                    = $req->input('qty-' . $count);
+                $hargasatuan            = $req->input('harga-' . $count);
+
+                $caribarang             = SysProduk::where('kd_produk', $barang)->first();
+
+                $hitungstokbarang       = $caribarang['stok_tersedia'] - $qty;
+
+                if ($hitungstokbarang <= 0) {
+                    echo "Stok barang " . $caribarang->nama_produk . " habis / tidak cukup";
+                } else {
+
+                    BkPenjualanDetail::create([
+                        'kd_penjualan'  => $kdinvoice,
+                        'tgl_transaksi' => Carbon::now(),
+                        'kd_barang'     => $barang,
+                        'harga_satuan'  => $hargasatuan,
+                        'qty'           => $qty
+                    ]);
+
+                    SysProduk::where('kd_produk', $barang)
+                        ->update(['stok_tersedia' => $hitungstokbarang]);
+
+                    echo "Barang " . $caribarang->nama_produk . " Berhasil ditambahkan <br>";
+                }
             }
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
     }
 
-    public function tesLooping(Request $r)
+    public function tesInput(Request $r)
     {
-        $row = $r->input('totalkolom');
-        $num = (int) $row;
+        $data = $r->input('data');
 
-        for ($c = 1; $c <= $num; $c++) {
-            echo $c;
+        for ($x = 1; $x <= $data; $x++) {
+            $qty         = $r->input('qty-' . $x);
+            $harga       = $r->input('harga-' . $x);
+
+            echo $x;
         }
     }
 }

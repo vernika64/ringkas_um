@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tgl_transaksi');
             $table->string('kd_barang');
             $table->integer('harga_satuan');
+            $table->integer('qty');
         });
     }
 
