@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Penjualan;
 use App\Http\Controllers\Produk;
 use App\Http\Controllers\UserAccount;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,5 @@ Route::post('login', [UserAccount::class, 'prosesLogin']);
 Route::post('daftarakun', [UserAccount::class, 'daftarUser']);
 
 Route::post('beliBarang', [Produk::class, 'pembelianBarang']);
+
+Route::post('tesloop', [Penjualan::class, 'tesLooping']);
