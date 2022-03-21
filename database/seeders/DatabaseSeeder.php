@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SysKategori;
+use App\Models\SysKategoriProduk;
 use App\Models\SysUser;
 use App\Models\SysProduk;
 use Illuminate\Support\Carbon;
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
 
         // Untuk Tabel Kategori
 
-        SysKategori::create([
+        SysKategoriProduk::create([
             'nama_kategori'         => 'Air Minum',
             'deskripsi_kategori'    => 'Air Minum Kemasan',
             'tgl_dibuat'            => Carbon::now()
@@ -51,7 +51,8 @@ class DatabaseSeeder extends Seeder
             'harga_beli'            => 0,
             'harga_jual'            => 0,
             'stok_tersedia'         => 0,
-            'terakhir_diupdate'     => Carbon::now(),
+            'tgl_dibuat'            => Carbon::now(),
+            'tgl_diupdate'          => Carbon::now(),
             'kd_user'               => 1
         ]);
 
@@ -63,7 +64,8 @@ class DatabaseSeeder extends Seeder
             'harga_beli'            => 0,
             'harga_jual'            => 0,
             'stok_tersedia'         => 0,
-            'terakhir_diupdate'     => Carbon::now(),
+            'tgl_dibuat'            => Carbon::now(),
+            'tgl_diupdate'          => Carbon::now(),
             'kd_user'               => 1
         ]);
     }

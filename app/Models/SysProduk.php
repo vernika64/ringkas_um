@@ -9,7 +9,8 @@ class SysProduk extends Model
 {
     use HasFactory;
 
-    protected $table = 'sys_produk';
+    const CREATED_AT = 'tgl_dibuat';
+    const UPDATED_AT = 'tgl_diupdate';
 
-    public $timestamps = false;
+    protected $table = 'sys_produk';
 }

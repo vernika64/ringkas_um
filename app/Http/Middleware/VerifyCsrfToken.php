@@ -16,6 +16,8 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/daftarakun',
         'http://localhost:8000/beliBarang',
         'http://localhost:8000/jualBarang',
-        'http://localhost:8000/tesinput'
+        'http://localhost:8000/tesinput',
+        'http://localhost:8000/tambahproduk',
+        'http://localhost:8000/tambahkategoriproduk'
     ];
 }

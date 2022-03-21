@@ -27,6 +27,10 @@ Route::post('login', [UserAccount::class, 'prosesLogin']);
 
 Route::post('daftarakun', [UserAccount::class, 'daftarUser']);
 
+Route::post('tambahproduk', [Produk::class, 'tambahProdukItem']);
+
+Route::post('tambahkategoriproduk', [Produk::class, 'tambahProdukKategori']);
+
 Route::post('beliBarang', [Pembelian::class, 'pembelianBarang']);
 
 Route::post('jualBarang', [Penjualan::class, 'prosesPenjualan']);

@@ -22,7 +22,8 @@ return new class extends Migration
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->integer('stok_tersedia');
-            $table->datetime('terakhir_diupdate');
+            $table->datetime('tgl_dibuat');
+            $table->datetime('tgl_diupdate');
             $table->integer('kd_user');
         });
     }
