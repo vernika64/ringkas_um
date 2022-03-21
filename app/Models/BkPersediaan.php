@@ -20,6 +20,7 @@ class BkPersediaan extends Model
         'qty_barang',
         'harga_pokok_beli',
         'tgl_transaksi',
+        'waktu_transaksi',
         'kd_user'
     ];
 }

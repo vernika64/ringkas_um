@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Penjualan;
 use App\Http\Controllers\Produk;
+use App\Http\Controllers\Pembelian;
 use App\Http\Controllers\UserAccount;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +37,6 @@ Route::post('belibarang', [Pembelian::class, 'pembelianBarang']);
 
 Route::post('jualbarang', [Penjualan::class, 'prosesPenjualan']);
 
-Route::post('tesinput', [Penjualan::class, 'tesInput']);
+Route::get('tes', function () {
+    echo Carbon::now()->format('Y-m-d');
+});

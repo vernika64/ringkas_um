@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('kd_barang');
             $table->integer('qty_barang');
             $table->integer('harga_pokok_beli');
-            $table->dateTime('tgl_transaksi');
+            $table->date('tgl_transaksi');
+            $table->time('waktu_transaksi');
             $table->integer('kd_user');
         });
     }
