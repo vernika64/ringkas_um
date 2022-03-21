@@ -31,8 +31,8 @@ Route::post('tambahproduk', [Produk::class, 'tambahProdukItem']);
 
 Route::post('tambahkategoriproduk', [Produk::class, 'tambahProdukKategori']);
 
-Route::post('beliBarang', [Pembelian::class, 'pembelianBarang']);
+Route::post('belibarang', [Pembelian::class, 'pembelianBarang']);
 
-Route::post('jualBarang', [Penjualan::class, 'prosesPenjualan']);
+Route::post('jualbarang', [Penjualan::class, 'prosesPenjualan']);
 
 Route::post('tesinput', [Penjualan::class, 'tesInput']);
