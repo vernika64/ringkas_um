@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
             'harga_beli'            => 0,
             'harga_jual'            => 0,
             'stok_tersedia'         => 0,
+            'status'                => 0,
             'tgl_dibuat'            => Carbon::now(),
             'tgl_diupdate'          => Carbon::now(),
             'kd_user'               => 1
@@ -64,6 +65,7 @@ class DatabaseSeeder extends Seeder
             'harga_beli'            => 0,
             'harga_jual'            => 0,
             'stok_tersedia'         => 0,
+            'status'                => 0,
             'tgl_dibuat'            => Carbon::now(),
             'tgl_diupdate'          => Carbon::now(),
             'kd_user'               => 1

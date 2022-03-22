@@ -23,20 +23,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Area User Account
+
 Route::get('teslogin', [UserAccount::class, 'viewLogin']);
 
 Route::post('login', [UserAccount::class, 'prosesLogin']);
 
 Route::post('daftarakun', [UserAccount::class, 'daftarUser']);
 
-Route::post('tambahproduk', [Produk::class, 'tambahProdukItem']);
+// Untuk bagian produk
+
+Route::get('produk/', [Produk::class, 'lihatProdukAll']);
+
+Route::get('produk/{id}', [Produk::class, 'lihatProdukById']);
+
+Route::post('produk/tambahProduk', [Produk::class, 'tambahProdukItem']);
 
 Route::post('tambahkategoriproduk', [Produk::class, 'tambahProdukKategori']);
+
+Route::put('editproduk/{id}', [Produk::class, 'editProduk']);
+
+Route::post('hapusproduk/{id}', [Produk::class, 'hapusProduk']);
+
+// Untuk Bagian Transaksi
 
 Route::post('belibarang', [Pembelian::class, 'pembelianBarang']);
 
 Route::post('jualbarang', [Penjualan::class, 'prosesPenjualan']);
-
-Route::get('tes', function () {
-    echo Carbon::now()->format('Y-m-d');
-});
