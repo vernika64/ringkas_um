@@ -39,11 +39,11 @@ Route::get('produk/{id}', [Produk::class, 'lihatProdukById']);
 
 Route::post('produk/tambahProduk', [Produk::class, 'tambahProdukItem']);
 
-Route::post('tambahkategoriproduk', [Produk::class, 'tambahProdukKategori']);
+Route::post('produk/tambahKategoriProduk', [Produk::class, 'tambahProdukKategori']);
 
-Route::put('editproduk/{id}', [Produk::class, 'editProduk']);
+Route::put('produk/editProduk/{id}', [Produk::class, 'editProduk']);
 
-Route::post('hapusproduk/{id}', [Produk::class, 'hapusProduk']);
+Route::delete('produk/hapusProduk/{id}', [Produk::class, 'hapusProduk']);
 
 // Untuk Bagian Transaksi
 
