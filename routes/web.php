@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Kategori;
 use App\Http\Controllers\Penjualan;
 use App\Http\Controllers\Produk;
 use App\Http\Controllers\Pembelian;
@@ -37,13 +38,23 @@ Route::get('produk/', [Produk::class, 'lihatProdukAll']);
 
 Route::get('produk/{id}', [Produk::class, 'lihatProdukById']);
 
-Route::post('produk/tambahProduk', [Produk::class, 'tambahProdukItem']);
-
-Route::post('produk/tambahKategoriProduk', [Produk::class, 'tambahProdukKategori']);
+Route::post('produk/tambahProduk/', [Produk::class, 'tambahProdukItem']);
 
 Route::put('produk/editProduk/{id}', [Produk::class, 'editProduk']);
 
 Route::delete('produk/hapusProduk/{id}', [Produk::class, 'hapusProduk']);
+
+// Untuk bagian Kategori
+
+Route::get('kategori/', [Kategori::class, 'lihatKategoriAll']);
+
+Route::get('kategori/{id}', [Kategori::class, 'lihatKategoriById']);
+
+Route::post('kategori/tambahKategori', [Kategori::class, 'tambahKategori']);
+
+Route::put('kategori/editKategori/{id}', [Kategori::class, 'editKategori']);
+
+Route::delete('kategori/hapusKategori/{id}', [Kategori::class, 'hapusKategori']);
 
 // Untuk Bagian Transaksi
 

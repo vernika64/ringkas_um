@@ -2,54 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SysKategoriProduk;
 use App\Models\SysProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\SysKategoriProduk;
+use Symfony\Component\HttpFoundation\Response;
 
 class Produk extends Controller
 {
     public function lihatProdukAll()
     {
-        $produk = SysProduk::join('sys_kategori_produk', 'sys_produk.kd_kategori', '=', 'sys_kategori_produk.id')->get();
+        try {
+            $produk = SysProduk::join('sys_kategori_produk', 'sys_produk.kd_kategori', '=', 'sys_kategori_produk.id')->get();
 
-        foreach ($produk as $e) {
-            echo $e['kd_produk'] . '<br>';
-            echo $e['nama_produk'] . '<br>';
-            echo $e['nama_kategori'] . '<br>';
-            echo $e['stok_tersedia'] . '<br>';
-            echo $e['harga_jual'] . '<br><br>';
+            return response()->json([
+                'message'       => 'Data berhasil diambil',
+                'data'          => $produk
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message'       => 'server error',
+                'detail'        => $e
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function lihatProdukById($id)
     {
+        try {
+            $produk = SysProduk::where('kd_produk', $id)->join('sys_kategori_produk', 'sys_produk.kd_kategori', '=', 'sys_kategori_produk.id')->get();
 
-        $produk = SysProduk::where('kd_produk', $id)->join('sys_kategori_produk', 'sys_produk.kd_kategori', '=', 'sys_kategori_produk.id')->get();
+            if ($produk->isEmpty()) {
+                echo "Data tidak ditemukan";
+                return false;
+            }
 
-        if ($produk->isEmpty()) {
-            echo "Data tidak ditemukan";
-            return false;
-        }
-
-        foreach ($produk as $e) {
-            echo $e['kd_produk'] . '<br>';
-            echo $e['nama_produk'] . '<br>';
-            echo $e['nama_kategori'] . '<br>';
-            echo $e['stok_tersedia'] . '<br>';
-            echo $e['harga_jual'] . '<br><br>';
+            return response()->json([
+                'message'       => 'Data berhasil dicari',
+                'data'          => $produk
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message'       => 'server error',
+                'detail'        => $e
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function tambahProdukItem(Request $reg)
     {
-
-        $kd_produk              = $reg->kode;
-        $nama_produk            = $reg->nama;
-        $kode_kategori          = $reg->kategori;
-        $deskripsi              = $reg->desc;
-
         try {
+            $kd_produk              = $reg->kode;
+            $nama_produk            = $reg->nama;
+            $kode_kategori          = $reg->kategori;
+            $deskripsi              = $reg->desc;
+
             $inputproduk = new SysProduk;
 
             $inputproduk->kd_produk              = $kd_produk;
@@ -64,28 +71,44 @@ class Produk extends Controller
 
             $inputproduk->save();
 
-            echo "Sukses, " . $nama_produk . " berhasil ditambahkan";
-        } catch (\Throwable $th) {
-            echo "Gagal, " . $th->getMessage();
+            return response()->json([
+                'message'       => 'Data berhasil ditambahkan',
+                'data'          => $inputproduk
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message'       => 'server error',
+                'detail'        => $e
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
 
     public function editProduk($id, Request $re)
     {
-        $data = SysProduk::find($id);
+        try {
+            $data = SysProduk::find($id);
 
-        $data->nama_produk      = $re->nama;
-        $data->kd_kategori      = $re->kategori;
-        $data->deskripsi        = $re->desc;
-        $data->harga_beli       = $re->hg_beli;
-        $data->harga_jual       = $re->hg_jual;
-        $data->status           = $re->status;
-        $data->kd_user          = '1';
+            $data->nama_produk      = $re->nama;
+            $data->kd_kategori      = $re->kategori;
+            $data->deskripsi        = $re->desc;
+            $data->harga_beli       = $re->hg_beli;
+            $data->harga_jual       = $re->hg_jual;
+            $data->status           = $re->status;
+            $data->kd_user          = '1';
 
-        $data->save();
+            $data->save();
 
-        echo "Data " . $data->nama_produk . " telah berhasil diedit";
+            return response()->json([
+                'message'       => 'Data berhasil diedit',
+                'data'          => $data
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message'       => 'server error',
+                'detail'        => $e
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function hapusProduk($id)
@@ -94,28 +117,15 @@ class Produk extends Controller
             $data = SysProduk::find($id);
             $data->delete();
 
-            echo 'Data berhasil dihapus';
-        } catch (\Throwable $th) {
-            echo 'Error' . $th->getMessage();
-        }
-    }
-
-    public function tambahProdukKategori(Request $req)
-    {
-        $nm_produk = $req->nama;
-        $ds_produk = $req->deskripsi;
-
-        try {
-            $inputdata = new SysKategoriProduk;
-
-            $inputdata->nama_kategori           = $nm_produk;
-            $inputdata->deskripsi_kategori      = $ds_produk;
-            $inputdata->tgl_dibuat              = Carbon::now();
-            $inputdata->save();
-
-            echo "Sukses";
-        } catch (\Throwable $th) {
-            echo "Gagal, " . $th->getMessage();
+            return response()->json([
+                'message'           => 'Data berhasil dihapus',
+                'data'              => $data
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message'       => 'server error',
+                'detail'        => $e
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

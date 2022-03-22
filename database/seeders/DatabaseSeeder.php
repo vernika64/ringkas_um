@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
         SysProduk::create([
             'kd_produk'             => 'AQ_GLN',
             'nama_produk'           => 'AQUA GALON',
-            'kd_kategori'           => 0,
+            'kd_kategori'           => 1,
             'deskripsi'             => 'AQUA Galon isi 19L',
             'harga_beli'            => 0,
             'harga_jual'            => 0,
@@ -62,6 +62,34 @@ class DatabaseSeeder extends Seeder
             'nama_produk'           => 'AQUA BOTOL SEDANG',
             'kd_kategori'           => 1,
             'deskripsi'             => 'AQUA Botol ukuran Sedang isi 600ml',
+            'harga_beli'            => 0,
+            'harga_jual'            => 0,
+            'stok_tersedia'         => 0,
+            'status'                => 0,
+            'tgl_dibuat'            => Carbon::now(),
+            'tgl_diupdate'          => Carbon::now(),
+            'kd_user'               => 1
+        ]);
+
+        SysProduk::create([
+            'kd_produk'             => 'AQ_1200',
+            'nama_produk'           => 'AQUA BOTOL BESAR',
+            'kd_kategori'           => 1,
+            'deskripsi'             => 'AQUA Botol ukuran Besar isi 1 Liter',
+            'harga_beli'            => 0,
+            'harga_jual'            => 0,
+            'stok_tersedia'         => 0,
+            'status'                => 0,
+            'tgl_dibuat'            => Carbon::now(),
+            'tgl_diupdate'          => Carbon::now(),
+            'kd_user'               => 1
+        ]);
+
+        SysProduk::create([
+            'kd_produk'             => 'AQ_240',
+            'nama_produk'           => 'AQUA Gelas 240ml',
+            'kd_kategori'           => 1,
+            'deskripsi'             => 'AQUA Gelas 240Ml isi 48 cup',
             'harga_beli'            => 0,
             'harga_jual'            => 0,
             'stok_tersedia'         => 0,
